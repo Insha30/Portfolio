@@ -1,6 +1,10 @@
 import { CONTACT } from "../constants";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -16,10 +20,50 @@ const fadeInUp = {
 };
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_uzctp4l",   
+        "template_48uir42",    
+        form.current,
+        "F3Hbvyt33k00nQViI"   
+      )
+      .then(
+        () => {
+          toast.success('Message sent successfully!', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+          e.target.reset();
+        },
+        (error) => {
+          console.error('EmailJS Error:', error.text);
+          toast.error('Failed to send message. Please try again.', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        }
+      );
+  };
+
   return (
     <div className="border-t border-neutral-900 bg-neutral-950 text-white py-20 px-6 sm:px-10 lg:px-32">
       <motion.h2
-         whileInView={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -100 }}
         transition={{ duration: 0.5 }}
         className="m-20 text-center text-4xl"
@@ -46,15 +90,17 @@ const Contact = () => {
         </motion.div>
 
         <motion.form
+          ref={form}
+          onSubmit={sendEmail}
           initial="hidden"
           whileInView="visible"
           variants={fadeInUp}
           custom={2}
           className="w-full lg:w-1/2 space-y-4"
-          onSubmit={(e) => e.preventDefault()}
         >
           <input
             type="text"
+            name="user_name"
             placeholder="Your Name"
             className="w-full bg-neutral-900 p-3 rounded text-white border border-neutral-700 
             focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 
@@ -63,6 +109,7 @@ const Contact = () => {
           />
           <input
             type="email"
+            name="user_email"
             placeholder="Your Email"
             className="w-full bg-neutral-900 p-3 rounded text-white border border-neutral-700 
             focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 
@@ -70,6 +117,7 @@ const Contact = () => {
             required
           />
           <textarea
+            name="message"
             placeholder="Your Message"
             rows="4"
             className="w-full bg-neutral-900 p-3 rounded text-white border border-neutral-700 
@@ -114,6 +162,8 @@ const Contact = () => {
       >
         &copy; {new Date().getFullYear()} Insha Iqbal
       </motion.div>
+
+      <ToastContainer />
     </div>
   );
 };
