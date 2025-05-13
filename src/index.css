@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+* {
+  font-family: "Lato", sans-serif;
+}
+
+.placeholder-glow::placeholder {
+  color: #c084fc;
+  text-shadow: 0 0 6px #2b1514, 0 0 10px #141415;
+  opacity: 0.8;
+  transition: text-shadow 0.3s ease;
+}
