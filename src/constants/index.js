@@ -8,8 +8,6 @@ import pro4 from "../assets/projects/weather1.png";
 
 export const HERO_CONTENT = "I am a highly motivated tech-enthusiast, with a passion for front-end and full-stack development. I have a strong foundation in HTML, CSS, JavaScript, and I am continuously enhancing my skills in React.js and Node.js. I am eager to gain hands-on experience in web development and contribute to innovative projects that help me grow as a developer. I am open to opportunities such as internships, freelance projects, or entry-level roles that allow me to apply my knowledge while learning from industry professionals.";
 
-export const ABOUT_TEXT = "Hey! I'm a Full-Stack Developer who loves building cool, responsive web apps. I’ve learned full-stack development and DSA from Apna College, and even interned at Unified Mentor where I worked on real-world projects using tools like Socket.IO and Cloudinary. From chat apps to weather apps and games, I enjoy bringing ideas to life with clean code and smooth UI. Always up for learning something new!";
-
 export const CERTIFICATES = [
   {
     title: "Full Stack Web Development",
